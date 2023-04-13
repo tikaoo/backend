@@ -1,0 +1,18 @@
+package com.minsait.fintech.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.minsait.fintech.entity.Cliente;
+import com.minsait.fintech.entity.Emprestimos;
+
+public interface EmprestimoRepository extends JpaRepository<Emprestimos,Integer>{
+	List<Emprestimos> findByCliente(Cliente cliente);
+	
+	Optional<Emprestimos> findByIdEmprestimoAndCliente(Integer idEmprestimo, Cliente cliente);
+
+	
+
+}

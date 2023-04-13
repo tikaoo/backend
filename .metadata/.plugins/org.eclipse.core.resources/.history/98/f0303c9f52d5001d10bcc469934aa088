@@ -1,0 +1,5 @@
+package com.minsait.fintech.entity;
+
+public enum TipoRelacionamento {
+
+}

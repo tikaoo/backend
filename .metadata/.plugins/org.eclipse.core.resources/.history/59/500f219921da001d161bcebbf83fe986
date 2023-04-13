@@ -1,0 +1,74 @@
+package com.minsait.fintech.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.minsait.fintech.entity.Cliente;
+import com.minsait.fintech.entity.Emprestimos;
+import com.minsait.fintech.entity.TipoRelacionamento;
+import com.minsait.fintech.repository.EmprestimoRepository;
+
+@Service
+public class EmprestimoService {
+	private final EmprestimoRepository emprestimoRepository;
+
+	public EmprestimoService(EmprestimoRepository emprestimoRepository) {
+		this.emprestimoRepository = emprestimoRepository;
+
+	}
+
+	public List<Emprestimos> buscarPorCliente(Cliente cliente) {
+		List<Emprestimos> emprestimos = emprestimoRepository.findByCliente(cliente);
+		if (emprestimos.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+					"Não há empréstimos para o CPF do cliente informado.");
+		}
+		return emprestimos;
+	}
+
+	public Emprestimos buscarEmprestimoPorIdCliente(Integer idEmprestimo, Cliente cliente) {
+		List<Emprestimos> emprestimos = emprestimoRepository.findByCliente(cliente);
+		return emprestimos.stream().filter(e -> e.getIdEmprestimo().equals(idEmprestimo)).findFirst()
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+						"Empréstimo com ID " + idEmprestimo + " não encontrado para o CPF " + cliente.getCpf() + "."));
+	}
+
+	public Emprestimos salvarEmprestimo(Emprestimos emprestimo) {
+		double valorFinal = calcularValorFinal(emprestimo);
+		emprestimo.setValorFinal(valorFinal);
+		emprestimo = emprestimoRepository.save(emprestimo);
+		verificaValorTotalEmprestimos(emprestimo.getCliente());
+		return emprestimo;
+	}
+
+	public void deletarEmprestimo(Cliente cliente, Integer idEmprestimo) {
+		Optional<Emprestimos> emprestimo = emprestimoRepository.findByIdEmprestimoAndCliente(idEmprestimo, cliente);
+		if (emprestimo == null || emprestimo.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+					"Empréstimo com ID " + idEmprestimo + " não encontrado para o CPF " + cliente.getCpf() + ".");
+		}
+		emprestimoRepository.deleteById(idEmprestimo);
+	}
+
+	public double calcularValorFinal(Emprestimos emprestimo) {
+		TipoRelacionamento relacionamento = emprestimo.getRelacionamento();
+		return relacionamento.calcularValorFinal(emprestimo);
+	}
+
+	private void verificaValorTotalEmprestimos(Cliente cliente) {
+		BigDecimal valorTotalEmprestimos = BigDecimal.ZERO;
+		for (Emprestimos emprestimos : cliente.getEmprestimo()) {
+			valorTotalEmprestimos = valorTotalEmprestimos.add(BigDecimal.valueOf(emprestimos.getValorFinal()));
+		}
+		BigDecimal rendaMensal = cliente.getRendaMensal();
+		BigDecimal valorLimite = rendaMensal.multiply(BigDecimal.valueOf(100));
+		if (valorTotalEmprestimos.compareTo(valorLimite) > 0) {
+			throw new RuntimeException("O valor total dos empréstimos excede a renda mensal do cliente em 100 vezes.");
+		}
+	}
+}

@@ -1,0 +1,62 @@
+package com.minsait.fintech.entity;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.minsait.fintech.serializer.EmprestimoIdSerializer;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Cliente {
+	@Id
+	@Column(nullable = false, length = 11, unique = true)
+	private BigInteger cpf;
+	@Column(nullable = false, length = 100)
+	private String nome;
+	@Column(nullable = false, length = 10)
+	private BigDecimal rendaMensal;
+	@Column(nullable = false, length = 100)	
+	private String cep;	
+	@Column(nullable = false, length = 100)	
+	private String logradouro;	
+	@Column(nullable = false, length = 100)	
+	private Integer numero;
+	@Column(nullable = false, length = 100)	
+	private String bairro;	
+	@Column(nullable = false, length = 100)	
+	private String cidade;
+	@Column(nullable = false, length = 2)	
+	private String uf;	
+	
+	
+	@Column()	
+	private Integer quantidadeEmprestimo;
+	
+	@OneToMany(mappedBy = "cliente")
+	@JsonSerialize(using = EmprestimoIdSerializer.class)
+	private List<Emprestimos> emprestimo = new ArrayList<>();
+	
+	public void updateQtdeEmprestido() {
+        this.quantidadeEmprestimo = emprestimo.size();
+    }
+	@PrePersist
+    public void prePersist() {
+		quantidadeEmprestimo = 0;
+    }
+}

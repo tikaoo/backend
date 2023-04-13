@@ -1,0 +1,5 @@
+package com.minsait.fintech.repository;
+
+public interface EmprestimoRepository {
+
+}

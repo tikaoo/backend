@@ -1,0 +1,19 @@
+INSERT INTO Cliente (cpf, nome, rendaMensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (12345678900, 'João da Silva', 5000.00, '01000-000', 'Rua das Flores', 100, 'Jardim América', 'São Paulo', 'SP');
+
+INSERT INTO Cliente (cpf, nome, rendaMensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (98765432100, 'Maria Oliveira', 3000.00, '01310-100', 'Avenida Paulista', 500, 'Bela Vista', 'São Paulo', 'SP');
+
+INSERT INTO Cliente (cpf, nome, rendaMensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (11122233344, 'Pedro Santos', 8000.00, '22460-030', 'Rua das Palmeiras', 200, 'Jardim Botânico', 'Rio de Janeiro', 'RJ');
+
+INSERT INTO Cliente (cpf, nome, rendaMensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (55566677788, 'Ana Clara', 4000.00, '30190-060', 'Rua do Comércio', 50, 'Centro', 'Belo Horizonte', 'MG');
+
+INSERT INTO Cliente (cpf, nome, rendaMensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (99988877766, 'José Silva', 6000.00, '01430-000', 'Avenida Brasil', 1000, 'Jardim América', 'São Paulo', 'SP');
+
+
+
+
+

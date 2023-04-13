@@ -1,0 +1,29 @@
+INSERT INTO cliente (cpf, nome, renda_Mensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (12345678900, 'João da Silva', 5000.00, '01000-000', 'Rua das Flores', 100, 'Jardim América', 'São Paulo', 'SP');
+
+INSERT INTO cliente (cpf, nome, renda_Mensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (98765432109, 'Maria Oliveira', 3000.00, '01310-100', 'Avenida Paulista', 500, 'Bela Vista', 'São Paulo', 'SP');
+
+INSERT INTO cliente (cpf, nome, renda_Mensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (11122233344, 'Pedro Santos', 8000.00, '22460-030', 'Rua das Palmeiras', 200, 'Jardim Botânico', 'Rio de Janeiro', 'RJ');
+
+INSERT INTO cliente (cpf, nome, renda_Mensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (55566677788, 'Ana Clara', 4000.00, '30190-060', 'Rua do Comércio', 50, 'Centro', 'Belo Horizonte', 'MG');
+
+INSERT INTO cliente (cpf, nome, renda_Mensal, cep, logradouro, numero, bairro, cidade, uf)
+VALUES (99988877766, 'José Silva', 6000.00, '01430-000', 'Avenida Brasil', 1000, 'Jardim América', 'São Paulo', 'SP');
+
+
+INSERT INTO emprestimos (valor_Inicial, data_Inicial, data_Final, cpfCliente)
+VALUES (1000.00, '2022-01-01', '2022-07-01', 99988877766);
+
+INSERT INTO emprestimos (valor_Inicial, data_Inicial, data_Final, cpfCliente)
+VALUES (5000.00, '2022-02-01', '2022-08-01', 99988877766);
+
+INSERT INTO emprestimos (valor_Inicial, data_Inicial, data_Final, cpfCliente)
+VALUES (2000.00, 2500.00, '2022-03-01', '2022-09-01', 11122233344);
+
+
+
+
+

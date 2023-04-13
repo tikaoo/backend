@@ -1,0 +1,85 @@
+package com.minsait.fintech.controller;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.minsait.fintech.Service.ClienteService;
+import com.minsait.fintech.Service.EmprestimoService;
+import com.minsait.fintech.entity.Cliente;
+import com.minsait.fintech.entity.Emprestimos;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Post", description = "Este endpoint permite a criação, a listagem e exclusão de um empréstimo.")
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/api/v1/fintech/clientes")
+public class EmprestimosController {
+	
+	private final EmprestimoService emprestimoService;
+	private final ClienteService clienteService;
+
+	public EmprestimosController(@Qualifier("emprestimoService") EmprestimoService emprestimoService,
+			@Qualifier("clienteService") ClienteService clienteService) {
+		this.emprestimoService = emprestimoService;
+		this.clienteService = clienteService;
+	}
+	@Operation(summary = "Listar todos os clientes")
+	@GetMapping("/emprestimos")
+	public List<Emprestimos> buscarTodos() {
+		List<Emprestimos> emprestimos = emprestimoService.buscarTodos();
+		return emprestimos;
+	}	
+	@Operation(summary = "Lista todos os emprestimos por cliente")
+	@GetMapping("/{cpf}/emprestimos")
+	public ResponseEntity<List<Emprestimos>> buscarCliente(@PathVariable @CPF BigInteger cpf) {
+		Cliente cliente = clienteService.buscarClienteCpf(cpf);
+		List<Emprestimos> emprestimos = emprestimoService.buscarPorCliente(cliente);
+		return ResponseEntity.ok(emprestimos);
+	}
+	@Operation(summary = "Lista o emprestimo por ID")
+	@GetMapping("/{cpf}/emprestimos/{idEmprestimo}")
+	public ResponseEntity<Emprestimos> buscarEmprestimoCpf(@PathVariable Integer idEmprestimo,
+			@PathVariable @CPF BigInteger cpf) {
+		Cliente cliente = clienteService.buscarClienteCpf(cpf);
+		Emprestimos emprestimo = emprestimoService.buscarEmprestimoPorIdCliente(idEmprestimo, cliente);
+
+		return ResponseEntity.ok(emprestimo);
+	}
+	@Operation(summary = "Deleta o emprestimo por ID")
+	@DeleteMapping("/{cpf}/emprestimos/{idEmprestimo}")
+	public ResponseEntity<Void> deleteEmprestimo(@PathVariable Integer idEmprestimo,
+			@PathVariable @CPF BigInteger cpf) {
+		Cliente cliente = clienteService.buscarClienteCpf(cpf);
+		emprestimoService.deletarEmprestimo(cliente, idEmprestimo);
+		clienteService.updateQtdeEmprestido();
+		return ResponseEntity.noContent().build();
+	}
+	@Operation(summary = "salva um emprestimo por cliente")
+	@PostMapping("/{cpf}/emprestimos")
+	public ResponseEntity<Emprestimos> salvarEmprestimo(@RequestBody @Validated Emprestimos emprestimos,
+	                                             @PathVariable BigInteger cpf) {
+		Cliente cliente = clienteService.buscarClienteCpf(cpf);
+		emprestimos.setCliente(cliente);		
+	    Emprestimos emprestimo = emprestimoService.salvarEmprestimo(emprestimos);
+	    emprestimo.getCliente().updateQtdeEmprestido();
+	    return ResponseEntity.ok(emprestimo);
+	}
+
+}
+
+
