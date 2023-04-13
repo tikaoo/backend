@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "5ff2d1a1-46fc-435f-aea1-d92df6024956",
+		"name": "mindsit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20529341"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Cadastrar cliente",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Lista de valores para cada variável\r",
+									"const cpfs = [  \"50977654231\",  \"36579167597\",  \"05838786414\",  \"90379770507\",  \"75658652716\",  \"32261812039\",  \"71425414659\",  \"04154069319\",  \"75509069710\",  \"52205734775\",  \"33218816435\",  \"45837184931\",  \"72537750739\",  \"82607815047\",  \"28221068230\",  \"23776318098\",  \"03322761236\",  \"69423288881\",  \"76639115750\",  \"66719151071\"];\r",
+									"\r",
+									"const nomes = ['Miguel','Arthur','Gael','Théo','Heitor','Ravi','Davi','Bernardo','Noah','Gabriel','Samuel','Pedro','Anthony','Isaac','Benício','Benjamin','Matheus','Lucas','Joaquim','Nicolas'];\r",
+									"const rendas = [  9000.50,  12000.00,  8000.00,  14000.75,  11000.20,  10000.00,  15000.80,  6000.25,  13000.50,  8500.70,  9500.00,  11000.60,  7500.90,  12500.25,  7000.30,  10500.80,  13500.10,  8500.25,  11500.40,  9000.75]\r",
+									"  \r",
+									";\r",
+									"const ruas = [  \"Rua dos Lírios\",  \"Rua dos Girassóis\",  \"Rua das Rosas\",  \"Rua das Orquídeas\",  \"Rua dos Jasmins\",  \"Rua das Margaridas\",  \"Rua das Violetas\",  \"Rua dos Cravos\",  \"Rua dos Lírios Amarelos\",  \"Rua das Hortênsias\",  \"Rua das Begônias\",  \"Rua das Tulipas\",  \"Rua das Camélias\",  \"Rua dos Antúrios\",  \"Rua das Dálias\",  \"Rua das Bromélias\",  \"Rua das Azaléias\",  \"Rua dos Amores-Perfeitos\",  \"Rua das Petúnias\",  \"Rua dos Manacás\"];\r",
+									"const ceps = [  \"02726020\",  \"02727030\",  \"02728040\",  \"02729050\",  \"02730060\",  \"02731070\",  \"02732080\",  \"02733090\",  \"02734100\",  \"02735110\",  \"02736120\",  \"02737130\",  \"02738140\",  \"02739150\",  \"02740160\",  \"02741170\",  \"02742180\",  \"02743190\",  \"02744200\",  \"02745210\"];\r",
+									"const numeros = [  100,  200,  300,  400,  500,  600,  700,  800,  900,  1000,  1100,  1200,  1300,  1400,  1500,  1600,  1700,  1800,  1900,  2000];\r",
+									"\r",
+									"const cidades = [\"Adamantina\",\"Adolfo\",\"Aguaí\",\"Águas da Prata\",\"Águas de Lindóia\",\"Águas de Santa Bárbara\",\"Águas de São Pedro\",\"Agudos\",\"Alambari\",\"Alfredo Marcondes\",\"Altair\",\"Altinópolis\",\r",
+									"        \"Alto Alegre\",\"Alumínio\",\"Álvares Florence\",\"Álvares Machado\",\"Álvaro de Carvalho\",\r",
+									"        \"Alvinlândia\",\"Americana\",\"Américo Brasiliense\"];\r",
+									"\r",
+									"const bairros =[ \"Barcelona\",\"Boa Vista\",\"Cerâmica\",\"Fundão\",\"Jardim São Caetano\",\"Mauá\",\r",
+									"      \"Nova Gerti\",\"Olímpico\",\"Oswaldo Cruz\",\"Prosperidade\",\"Santa Maria\",\"Santa Paula\"];\r",
+									"\r",
+									"const ufs = [\"SP\",\"RJ\",\"SC\",\"AM\",\"CE\",\"PE\",\"AC\"]\r",
+									"\r",
+									"// Função para selecionar um valor aleatório de uma lista\r",
+									"function randomValue(arr) {\r",
+									"  return arr[Math.floor(Math.random() * arr.length)];}\r",
+									"\r",
+									"// Define os valores das variáveis ​​como um valor aleatório de sua lista correspondente\r",
+									"pm.environment.set(\"cpf\", randomValue(cpfs));\r",
+									"pm.environment.set(\"nome\", randomValue(nomes));\r",
+									"pm.environment.set(\"rendaMensal\", randomValue(rendas));\r",
+									"pm.environment.set(\"logradouro\", randomValue(ruas));\r",
+									"pm.environment.set(\"cep\", randomValue(ceps));\r",
+									"pm.environment.set(\"numero\", randomValue(numeros));\r",
+									"pm.environment.set(\"cidade\", randomValue(cidades));\r",
+									"pm.environment.set(\"uf\", randomValue(ufs));\r",
+									"pm.environment.set(\"bairro\", randomValue(bairros));\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"cpf\": \"{{cpf}}\",\r\n    \"nome\": \"{{nome}}\",\r\n    \"rendaMensal\": {{rendaMensal}},\r\n    \"logradouro\": \"{{rua}}\",\r\n    \"numero\": {{numero}},\r\n    \"cep\": \"{{cep}}\",\r\n    \"bairro\":{{bairro}},\r\n    \"cidade\":{{cidade}},\r\n    \"uf\":{{uf}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Clientes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Clientes por CPF",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/32261812039",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Clientes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"nome\":\"joao\",\r\n        \"rendaMensal\": 70000.00,\r\n        \"rua\": \"rua dos otarios\",\r\n        \"cep\": \"02727005\",\r\n        \"numero\": 650\r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/32261812039",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente por CPF",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/11111111111",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"11111111111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empréstimo",
+			"item": [
+				{
+					"name": "Buscar Emprestimo por CPF e Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/32261812039/emprestimos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039",
+								"emprestimos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Emprestimo por CPF",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const valorInicials = [\r",
+									"  25007.79,\r",
+									"  67406.88,\r",
+									"  30502.17,\r",
+									"  89202.41,\r",
+									"  34029.54,\r",
+									"  51563.63,\r",
+									"  64347.64,\r",
+									"  92471.07,\r",
+									"  75680.11,\r",
+									"  24883.02,\r",
+									"  78744.16,\r",
+									"  7994.15,\r",
+									"  78127.72,\r",
+									"  43469.7,\r",
+									"  41639.71,\r",
+									"  68818.28,\r",
+									"  24288.57,\r",
+									"  79114.77,\r",
+									"  21591.91,\r",
+									"  99197.75\r",
+									"];\r",
+									"\r",
+									"const dataInicials = [\r",
+									"  \"2023-03-31\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-02\",\r",
+									"  \"2023-04-01\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-03\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-06\",\r",
+									"  \"2023-04-02\",\r",
+									"  \"2023-04-01\",\r",
+									"  \"2023-04-02\",\r",
+									"  \"2023-04-02\",\r",
+									"  \"2023-04-03\",\r",
+									"  \"2023-04-01\",\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-06\",\r",
+									"  \"2023-04-02\"\r",
+									"];\r",
+									"\r",
+									"const dataFinals = [\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-08\",\r",
+									"  \"2023-04-03\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-08\",\r",
+									"  \"2023-04-06\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-08\",\r",
+									"  \"2023-04-06\",\r",
+									"  \"2023-04-08\",\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-04\",\r",
+									"  \"2023-04-06\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-05\",\r",
+									"  \"2023-04-07\",\r",
+									"  \"2023-04-06\"\r",
+									"];\r",
+									"\r",
+									"const relacionamentos = [\"OURO\",\"PRATA\",\"BRONZE\"];\r",
+									"\r",
+									"function randomValue(arr) {\r",
+									"  return arr[Math.floor(Math.random() * arr.length)];\r",
+									"}\r",
+									"pm.environment.set(\"valorInicial\", randomValue(valorInicials));\r",
+									"pm.environment.set(\"dataInicial\", '\"' + randomValue(dataInicials) + '\"');\r",
+									"pm.environment.set(\"dataFinal\", '\"' + randomValue(dataFinals) + '\"');\r",
+									"pm.environment.set(\"relacionamento\", '\"' + randomValue(relacionamentos) + '\"');\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"valorInicial\": {{valorInicial}},\r\n    \"dataInicial\": {{dataInicial}},\r\n    \"dataFinal\": {{dataFinal}},\r\n    \"relacionamento\": {{relacionamento}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/32261812039/emprestimos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039",
+								"emprestimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Emprestimo por CPF e ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/32261812039/emprestimos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039",
+								"emprestimos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Emprestimo por cpf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/32261812039/emprestimos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"32261812039",
+								"emprestimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Emprestimos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXRyaWNrIiwiaXNzIjoiQ2xpZW50ZXMiLCJpZCI6MSwiZXhwIjoxNjgxMDQ1MTk3fQ.f2OmqDlnM08wwoCZmER4vNvPygsCjRswM_lLfhHhY7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/emprestimos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"emprestimos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
