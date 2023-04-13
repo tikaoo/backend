@@ -47,7 +47,7 @@ Para a camada de banco de dados foi utilizada a seguinte dependência: H2 banco 
 
 Necessário baixar o código do projeto, fork, abri-lo em alguma IDE recomendo o eclipse, subir o servidor e acessá-lo no localhost:8080/h2.
 
-OBS: no arquivo aplication.properties a linha`linha #spring.sql.init.mode = always`, insere alguns clientes e empréstimos automaticamente, caso queira e só acessar o arquivo
+OBS: no arquivo aplication.properties a linha `#spring.sql.init.mode = always`, insere alguns clientes e empréstimos automaticamente, caso queira e só acessar o arquivo
 e retirar o # do início, lembrando que se você o utilizar e por algum motivo precisar levantar o servidor novamente irá ocorrer um erro, pois o banco não aceita dois CPFs iguais,será necessário voltar com o # no início da linha após a primeira execução do servidor.
 
 Também disponibilizo a collection do postman, com a massa de dados já salva, para facilitar os testes, só baixar o arquivo json, mindsit.postman_collection.json, importar no próprio e efetuar as correções na URL.
