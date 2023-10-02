@@ -1,4 +1,4 @@
-# Pessaol  
+# Pessoal  
 Este projeto foi criado para testar meus conhecimentos na linguagem java. O desafio consistia em desenvolver uma aplicação API Rest para gerenciar clientes e empréstimos. Esta API cria um CRUD e o relacionamento entre duas tabelas (Clientes e Empréstimos), onde a entidade pessoa poderia receber mais de um Empréstimo.  
 
 # Estrutura do projeto
